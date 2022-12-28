@@ -1,8 +1,14 @@
-@import './var.scss';
+@import './var';
 
 // @tailwind base; //按钮白色bug
-@tailwind components;
-@tailwind utilities;
+// @tailwind components;
+// @tailwind utilities;
+.test {
+	position: relative;
+	text-align: center;
+	background-color: #fff;
+	border: 1px solid #000;
+}
 
 // body {
 //   background-color: $primary-color;
