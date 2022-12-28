@@ -1,5 +1,5 @@
 function Login() {
-  return <div className='flex'>Login</div>;
+	return <div className="flex">Login</div>;
 }
 
 export default Login;

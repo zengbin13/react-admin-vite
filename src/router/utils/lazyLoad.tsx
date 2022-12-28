@@ -10,15 +10,11 @@ import { Spin } from 'antd';
  * @returns element
  */
 const lazyLoad = (Comp: React.ComponentType<any>): React.ReactNode => {
-  return (
-    <Suspense
-      fallback={
-        <Spin size='large' className='tw-flex tw-justify-center tw-items-center tw-h-full' />
-      }
-    >
-      <Comp />
-    </Suspense>
-  );
+	return (
+		<Suspense fallback={<Spin size="large" className="tw-flex tw-justify-center tw-items-center tw-h-full" />}>
+			<Comp />
+		</Suspense>
+	);
 };
 
 export default lazyLoad;

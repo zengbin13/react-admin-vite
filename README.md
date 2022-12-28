@@ -40,10 +40,6 @@ resolve: {
 }
 ```
 
-### 代码规范初始化
-
-
-
 ### 样式初始化
 
 ```bash
@@ -118,6 +114,139 @@ module.exports = {
 /* 存在UI框架按钮透明bug */
 @tailwind components;
 @tailwind utilities;
+```
+
+## 代码规范配置
+
+###  eslint 检测代码规范
+
+#### 初始化 eslint 配置
+
+```bash
+yarn add eslint -D
+npx eslint --init 
+or
+npm init @eslint/config
+```
+
+根据选择生成`.eslintrc.cjs` 将会安装 `eslint-plugin-react  @typescript-eslint/eslint-plugin @typescript-eslint/parser`
+
+#### 创建`.eslintignore` 文件
+
+```bash
+*.sh
+node_modules
+*.md
+*.woff
+*.ttf
+.vscode
+.idea
+dist
+/public
+/docs
+.husky
+.local
+/bin
+.eslintrc.js
+*.config.js
+vite.config.ts
+```
+
+#### 校验hooks规则
+
+```bash
+yarn add eslint-plugin-react-hooks -D 
+```
+
+```json
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  extends: [
+    // ...
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
+```
+
+#### 使用airbnb规则校验（可选）
+
+```
+yarn add eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y -D
+yarn add eslint-config-airbnb-typescript -D
+```
+
+[详见](https://www.baidu.com/baidu?tn=monline_4_dg&ie=utf-8&wd=react%2Fjsx-runtime)
+
+#### eslint指令
+
+```json
+"lint:eslint": "eslint --fix --ext .js,.ts,.tsx ./src",
+```
+
+
+
+### prettier 统一代码风格
+
+#### 初始化 prettier 配置
+
+```bash
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+```
+
+#### 创建 `.prettierrc.cjs`文件
+
+```js
+module.exports = {
+  semi: false,
+  tabWidth: 2,
+  singleQuote: true,
+  trailingComma: 'es5',
+}
+```
+
+#### 创建.prettierignore文件
+
+```
+/dist/*
+.local
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
+```
+
+#### 解决冲突 `eslint-config-prettier`
+
+```js
+// .eslintrc.js 
+{
+  plugins: [
+     //...
+  	"prettier"
+  ],
+  extends:[
+    // 解决 eslint 和 prettier 的冲突 , 此项配置必须在最后
+    "prettier",
+	"plugin:prettier/recommended"
+  ]
+}
+```
+
+#### prettier指令
+
+```json
+"lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,scss,html,md}\"",
 ```
 
 
