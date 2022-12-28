@@ -40,6 +40,10 @@ resolve: {
 }
 ```
 
+### 代码规范初始化
+
+
+
 ### 样式初始化
 
 ```bash
@@ -53,6 +57,70 @@ import 'reset-css';
 import 'antd/dist/reset.css';
 import '@/styles/global.scss';
 ```
+
+#### 首屏loading
+
+由于`chunk.js`体积较大首页将会白屏，可在`index.html`应用根节点加载loading动画
+
+```html
+<div id="root">
+	<style>
+        .first-loading-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        }
+	 </style>
+	<div class="first-loading-wrap">
+		<div class="loading-wrap">
+			<span class="dot dot-spin">
+            	<i></i>
+            	<i></i>
+           		<i></i>
+            	<i></i>
+           </span>
+        </div>
+	</div>
+</div>
+
+```
+
+
+
+#### 使用 tailwind
+
+```bash
+yarn add tailwindcss postcss autoprefixer -D
+npx tailwindcss init -p
+```
+
+```js
+// tailwind.config.cjs
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  prefix: 'tw-',
+  important: true,
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+```css
+/* index.css */
+@tailwind base; 
+/* 存在UI框架按钮透明bug */
+@tailwind components;
+@tailwind utilities;
+```
+
+
 
 ## 路由
 
@@ -105,7 +173,9 @@ export default Router;
 
 const lazyLoad = (Comp: React.ComponentType<any>): React.ReactNode => {
   return (
-    <Suspense fallback={<Spin size='large' />}>
+    <Suspense fallback={
+    	<Spin size='large' className="center"/>
+    }>
       <Comp />
     </Suspense>
   );
