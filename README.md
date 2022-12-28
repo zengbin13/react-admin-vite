@@ -250,29 +250,36 @@ module.exports = {
 ### stylelint 格式化css代码
 
 ```bash
-yarn add stylelint stylelint-config-standard stylelint-config-prettier stylelint-scss stylelint-config-recess-order -D
+yarn add stylelint stylelint-config-standard stylelint-config-prettier postcss-scss stylelint-scss stylelint-config-recess-order -D
 ```
 
 - `stylelint-config-standard`:  stylelint标准可共享配置规则
 - `stylelint-config-prettier`: 配置 stylelint 和 prettier 兼容
+- `postcss-scss`: 识别scss语法
 - `stylelint-scss`：用于stylelint的scss检测规则的集合
 - `stylelint-config-recess-order`： 使用[Recess](https://github.com/twitter/recess/blob/29bccc870b7b4ccaa0a138e504caf608a6606b59/lib/lint/strict-property-order.js) 方式进行样式排序
 
 #### 配置文件`.stylelintrc.js`
 
 ```js
-module.export = {
+module.exports = {
 	extends: [
 		'stylelint-config-standard', 
+		'stylelint-config-standard-scss',
 		'stylelint-config-prettier', 
+		'stylelint-config-prettier-scss',
 		'stylelint-config-recess-order' 
 	],
-	plugins: ['stylelint-scss'],
-    rule: {
-        indentation: null, // 指定缩进空格
-    }
+	plugins: ['stylelint-scss'], 
+	overrides: [
+		{
+			files: '**/*.scss',
+			customSyntax: 'postcss-scss'
+		}
+	],
+	ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
+	rules: {}
 };
-
 ```
 
 #### 忽略规则 .stylelintignore
