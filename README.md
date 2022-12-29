@@ -338,7 +338,9 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 ### 提交信息 `commitlint` `commitizen` `cz-git`
 
-[详见](https://cz-git.qbb.sh/zh/config/#%E7%BA%AF%E6%B1%89%E5%8C%96%E6%A8%A1%E6%9D%BF)
+```bash
+yarn add commitlint -D
+```
 
 #### 使用`cz-git`
 
@@ -364,6 +366,7 @@ yarn add cz-git commitizen -D
 #### 创建`commitlint.config.js`
 
 - `cz-git` 与 `commitlint` 进行联动给予校验信息
+- [详见](https://cz-git.qbb.sh/zh/config/#%E7%BA%AF%E6%B1%89%E5%8C%96%E6%A8%A1%E6%9D%BF)
 
 ## 路由
 

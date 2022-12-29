@@ -31,12 +31,16 @@
       ]
     }
   },
+  // 包含在编译中的文件
   "include": [
-    "src"
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "vite.config.ts"
   ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ],
 }
