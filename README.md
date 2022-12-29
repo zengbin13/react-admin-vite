@@ -113,7 +113,7 @@ module.exports = {
 @tailwind utilities;
 ```
 
-## 代码规范配置
+## 代码校验规范
 
 ### eslint 检测代码规范
 
@@ -128,7 +128,7 @@ npm init @eslint/config
 
 根据选择生成`.eslintrc.cjs` 将会安装 `eslint-plugin-react  @typescript-eslint/eslint-plugin @typescript-eslint/parser`
 
-#### 忽略规则`.eslintignore` 
+#### 忽略规则`.eslintignore`
 
 ```bash
 *.sh
@@ -197,7 +197,7 @@ yarn add eslint-config-airbnb-typescript -D
 yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
 ```
 
-- [eslint-plugin-prettier](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fprettier%2Feslint-plugin-prettier)： 基于 prettier 代码风格的 eslint 规则，即eslint使用pretter规则来格式化代码
+- [eslint-plugin-prettier](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fprettier%2Feslint-plugin-prettier)： 基于 prettier 代码风格的 eslint 规则，即 eslint 使用 pretter 规则来格式化代码
 - [eslint-config-prettier](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fprettier%2Feslint-config-prettier)： 禁用所有与格式相关的 eslint 规则，解决 prettier 与 eslint 规则冲突，**确保将其放在 extends 队列最后，覆盖其他配置**
 
 #### 配置文件 `.prettierrc.cjs`
@@ -247,30 +247,32 @@ module.exports = {
 "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,scss,html,md}\"",
 ```
 
-### stylelint 格式化css代码
+### stylelint 格式化 css 代码
 
 ```bash
 yarn add stylelint stylelint-config-standard stylelint-config-prettier postcss-scss stylelint-scss stylelint-config-recess-order -D
 ```
 
-- `stylelint-config-standard`:  stylelint标准可共享配置规则
+- `stylelint-config-standard`: stylelint 标准可共享配置规则
 - `stylelint-config-prettier`: 配置 stylelint 和 prettier 兼容
-- `postcss-scss`: 识别scss语法
-- `stylelint-scss`：用于stylelint的scss检测规则的集合
+- `postcss-scss`: 识别 scss 语法
+- `stylelint-scss`：用于 stylelint 的 scss 检测规则的集合
 - `stylelint-config-recess-order`： 使用[Recess](https://github.com/twitter/recess/blob/29bccc870b7b4ccaa0a138e504caf608a6606b59/lib/lint/strict-property-order.js) 方式进行样式排序
+
+[参考](https://juejin.cn/post/7118294114734440455)
 
 #### 配置文件`.stylelintrc.js`
 
 ```js
 module.exports = {
 	extends: [
-		'stylelint-config-standard', 
+		'stylelint-config-standard',
 		'stylelint-config-standard-scss',
-		'stylelint-config-prettier', 
+		'stylelint-config-prettier',
 		'stylelint-config-prettier-scss',
-		'stylelint-config-recess-order' 
+		'stylelint-config-recess-order'
 	],
-	plugins: ['stylelint-scss'], 
+	plugins: ['stylelint-scss'],
 	overrides: [
 		{
 			files: '**/*.scss',
@@ -296,7 +298,43 @@ public/*
 "lint:stylelint": "stylelint --cache --fix \"**/*.{less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
 ```
 
+## 规范提交信息
 
+### 提交内容`husky` `lint-staged`
+
+`husky`是用来管理 `git hook` 将在 `git` 提交代码的过程触发
+
+```bash
+yarn add husky -D
+```
+
+#### 脚本命令
+
+```json
+{
+	"scripts": {
+		"prepare": "husky install"
+	}
+}
+```
+
+- 将在 `npm install`后自动执行该命令安装`husky`，新增`.husky`目录
+
+#### `pre-commit`钩子
+
+```bash
+yarn husky add .husky/pre-commit "yarn lint:eslint && yarn lint:prettier && yarn lint:stylelint"
+```
+
+#### 创建`lint-staged.config.cjs`
+
+- 本地暂存代码检查工具 `lint-staged`
+
+```bash
+yarn add lint-staged -D
+#更新pre-commit
+npx husky add .husky/pre-commit "npx lint-staged"
+```
 
 ## 路由
 
