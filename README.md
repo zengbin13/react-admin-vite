@@ -300,7 +300,7 @@ public/*
 
 ## 规范提交信息
 
-### 提交内容`husky` `lint-staged`
+### 提交内容 `husky` `lint-staged`
 
 `husky`是用来管理 `git hook` 将在 `git` 提交代码的过程触发
 
@@ -335,6 +335,35 @@ yarn add lint-staged -D
 #更新pre-commit
 npx husky add .husky/pre-commit "npx lint-staged"
 ```
+
+### 提交信息 `commitlint` `commitizen` `cz-git`
+
+[详见](https://cz-git.qbb.sh/zh/config/#%E7%BA%AF%E6%B1%89%E5%8C%96%E6%A8%A1%E6%9D%BF)
+
+#### 使用`cz-git`
+
+```bash
+# 管理员权限 可运行git cz
+npm install -g commitizen
+# 使用 cz 或 git cz 命令启动
+yarn add cz-git commitizen -D
+```
+
+- #### `package.json` 添加 `config` 指定使用的适配器
+
+```json
+{
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-git"
+		}
+	}
+}
+```
+
+#### 创建`commitlint.config.js`
+
+- `cz-git` 与 `commitlint` 进行联动给予校验信息
 
 ## 路由
 
