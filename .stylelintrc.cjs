@@ -15,5 +15,12 @@ module.exports = {
 		}
 	],
 	ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
-	rules: {}
+	rules: {
+		'selector-pseudo-class-no-unknown': [
+			true,
+			{
+				ignorePseudoClasses: ['global']
+			}
+		]
+	}
 };
