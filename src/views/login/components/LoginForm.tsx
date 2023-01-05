@@ -10,7 +10,6 @@ function LoginForm() {
 	const onFinish = async (values: any) => {
 		try {
 			setLoading(true);
-			console.log('Success:', values);
 			const res = await loginApi(values);
 			console.log(res);
 		} finally {
