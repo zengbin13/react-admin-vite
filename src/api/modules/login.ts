@@ -10,5 +10,5 @@ interface LoginForm {
 }
 
 export const loginApi = (data: LoginForm) => {
-	return http.post('/login', data);
+	return http.post('/api/login', data);
 };

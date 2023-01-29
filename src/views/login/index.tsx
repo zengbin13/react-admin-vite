@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 import loginLeftImg from '@/assets/images/login_left.png';
-import logoImg from '@/assets/images/logo.png';
+// import logoImg from '@/assets/images/logo.png';
 
 import LoginForm from './components/LoginForm';
 
@@ -14,8 +14,8 @@ function Login() {
 				<div className="right">
 					<div className="login-form">
 						<div className="login-logo">
-							<img className="login-icon" src={logoImg} alt="logo" />
-							<span className="logo-text">React-Admin</span>
+							{/* <img className="login-icon" src={logoImg} alt="logo" /> */}
+							<span className="logo-text">hello !</span>
 						</div>
 						<LoginForm />
 					</div>

@@ -4,14 +4,17 @@ import { useState } from 'react';
 import { loginApi } from '@/api/modules/login';
 
 function LoginForm() {
+	// 通过 Form.useForm 对表单数据域进行交互
 	const [form] = Form.useForm();
 
+	// loading
 	const [loading, setLoading] = useState<boolean>(false);
+	//提交表单且数据验证成功后回调事件
 	const onFinish = async (values: any) => {
 		try {
 			setLoading(true);
-			const res = await loginApi(values);
-			console.log(res);
+			const { data } = await loginApi(values);
+			console.log(data, 1111);
 		} finally {
 			setLoading(false);
 		}
@@ -22,7 +25,9 @@ function LoginForm() {
 			name="normal_login"
 			form={form}
 			initialValues={{
-				remember: true
+				remember: true,
+				account: '19100000001',
+				password: '666888'
 			}}
 			size="large"
 			onFinish={onFinish}
@@ -51,7 +56,7 @@ function LoginForm() {
 			</Form.Item>
 			<Form.Item>
 				<Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-					Log in
+					登录
 				</Button>
 			</Form.Item>
 		</Form>

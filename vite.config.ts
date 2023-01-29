@@ -16,6 +16,20 @@ export default defineConfig((configEnv: ConfigEnv): UserConfig => {
 				'@': resolve(__dirname, './src')
 			}
 		},
+		server: {
+			port: viteEnv.VITE_PORT,
+			open: viteEnv.VITE_OPEN,
+			cors: true,
+			// https: false,
+			// 代理跨域
+			proxy: {
+				'/api': {
+					target: viteEnv.VITE_API_URL,
+					changeOrigin: true
+					// rewrite: path => path.replace(/^\/api/, '')
+				}
+			}
+		},
 		plugins: [react()]
 	};
 });

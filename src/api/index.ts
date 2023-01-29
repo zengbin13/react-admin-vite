@@ -1,11 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
-import { AxiosCanceler } from './helper/axiosCancel';
 import { showFullScreenLoading, tryHideFullScreenLoading } from './helper/serviceLoading';
 import NProgress from '@/config/nprogress';
-import type { ResultData } from './interface';
 import { message } from 'antd';
 import { checkStatus } from './helper/checkStatus';
+import { reqeuestLog, responseLog } from './helper/requestLog';
 
+import type { ResultData } from './interface';
+
+import { AxiosCanceler } from './helper/axiosCancel';
 const axiosCanceler = new AxiosCanceler();
 
 class RequestHttp {
@@ -27,6 +29,8 @@ class RequestHttp {
 				axiosCanceler.addPending(config);
 				// 3.是否展示全屏loading
 				config.headers!.fullLoading && showFullScreenLoading();
+				// 4.输出请求日志
+				reqeuestLog(config);
 				return config;
 			},
 			(error: AxiosError) => {
@@ -46,6 +50,8 @@ class RequestHttp {
 				axiosCanceler.removePending(config);
 				// 3.关闭全屏loading
 				tryHideFullScreenLoading();
+				// 4.输出结果日志
+				responseLog(response);
 				return data;
 			},
 			(error: AxiosError<ResultData>) => {
@@ -78,7 +84,9 @@ class RequestHttp {
 
 const config: AxiosRequestConfig = {
 	// 默认地址请求地址，可在 .env 开头文件中修改
-	baseURL: import.meta.env.VITE_API_URL,
+	// baseURL: import.meta.env.VITE_API_URL,
+	// 使用http-proxy处理跨域
+	baseURL: '',
 	// 设置超时时间（10s）
 	timeout: 10000,
 	// 跨域时候允许携带凭证
@@ -87,4 +95,5 @@ const config: AxiosRequestConfig = {
 		fullLoading: false
 	}
 };
+
 export default new RequestHttp(config);
