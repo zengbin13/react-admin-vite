@@ -2,10 +2,17 @@ import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { loginApi } from '@/api/modules/login';
+import { setToken } from '@/redux/modules/global';
+import { useAppSelector, useAppDispatch } from '@/redux';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
 	// 通过 Form.useForm 对表单数据域进行交互
 	const [form] = Form.useForm();
+	//hooks
+	const token = useAppSelector(state => state.global.token);
+	const dispatch = useAppDispatch();
+	const nav = useNavigate();
 
 	// loading
 	const [loading, setLoading] = useState<boolean>(false);
@@ -14,7 +21,8 @@ function LoginForm() {
 		try {
 			setLoading(true);
 			const { data } = await loginApi(values);
-			console.log(data, 1111);
+			dispatch(setToken(data!.token));
+			nav('/');
 		} finally {
 			setLoading(false);
 		}
@@ -56,7 +64,7 @@ function LoginForm() {
 			</Form.Item>
 			<Form.Item>
 				<Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-					登录
+					登录 {token}
 				</Button>
 			</Form.Item>
 		</Form>

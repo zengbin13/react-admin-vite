@@ -68,16 +68,16 @@ class RequestHttp {
 			}
 		);
 	}
-	get<T, D>(url: string, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
+	get<T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
 		return this.service.get(url, config);
 	}
-	post<T, D>(url: string, data: D, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
+	post<T, D = any>(url: string, data: D, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
 		return this.service.post(url, data, config);
 	}
-	put<T, D>(url: string, data: D, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
+	put<T, D = any>(url: string, data: D, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
 		return this.service.put(url, data, config);
 	}
-	delete<T, D>(url: string, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
+	delete<T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
 		return this.service.delete(url, config);
 	}
 }
