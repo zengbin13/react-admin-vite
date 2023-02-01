@@ -5,24 +5,26 @@ import { loginApi } from '@/api/modules/login';
 import { setToken } from '@/redux/modules/global';
 import { useAppSelector, useAppDispatch } from '@/redux';
 import { useNavigate } from 'react-router-dom';
-
+import { HOME_URL } from '@/config/config';
 function LoginForm() {
-	// 通过 Form.useForm 对表单数据域进行交互
-	const [form] = Form.useForm();
 	//hooks
 	const token = useAppSelector(state => state.global.token);
 	const dispatch = useAppDispatch();
 	const nav = useNavigate();
 
+	// 通过 Form.useForm 对表单数据域进行交互
+	const [form] = Form.useForm();
+
 	// loading
 	const [loading, setLoading] = useState<boolean>(false);
+
 	//提交表单且数据验证成功后回调事件
 	const onFinish = async (values: any) => {
 		try {
 			setLoading(true);
 			const { data } = await loginApi(values);
 			dispatch(setToken(data!.token));
-			nav('/');
+			nav(HOME_URL);
 		} finally {
 			setLoading(false);
 		}

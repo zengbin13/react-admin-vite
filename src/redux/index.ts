@@ -9,10 +9,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 // 6.定义Hooks类型 - 见下
 
 import globalReducer from './modules/global';
+import menuReducer from './modules/menu';
 
 const store = configureStore({
 	reducer: {
-		global: globalReducer
+		global: globalReducer,
+		menu: menuReducer
 	}
 });
 

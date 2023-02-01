@@ -3,7 +3,6 @@ import loginLeftImg from '@/assets/images/login_left.png';
 // import logoImg from '@/assets/images/logo.png';
 
 import LoginForm from './components/LoginForm';
-
 function Login() {
 	return (
 		<div className={styles.root}>
