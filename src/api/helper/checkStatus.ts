@@ -18,6 +18,10 @@ const CODE_MESSAGE: any = {
 	503: '服务不可用，服务器暂时过载或维护',
 	504: '网关超时'
 };
+/**
+ * @description: 正常业务逻辑code
+ */
+export const codeVerificationArray: Array<number | string> = [200, 0, '200', '0'];
 
 /**
  * @description: 校验网络请求状态码

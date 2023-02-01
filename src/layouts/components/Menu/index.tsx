@@ -1,6 +1,7 @@
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from '@ant-design/icons';
+import { getMenuListApi } from '@/api/modules/menu';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -39,7 +40,13 @@ const items: MenuItem[] = [
 		getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')])
 	])
 ];
+
 const LayoutMenu = () => {
+	const getMenuList = async () => {
+		const { data } = await getMenuListApi();
+		console.log(data);
+	};
+	getMenuList();
 	return (
 		<>
 			<Menu mode="inline" theme="dark" items={items} />

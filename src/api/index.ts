@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } f
 import { showFullScreenLoading, tryHideFullScreenLoading } from './helper/serviceLoading';
 import NProgress from '@/config/nprogress';
 import { message } from 'antd';
-import { checkStatus } from './helper/checkStatus';
+import { checkStatus, codeVerificationArray } from './helper/checkStatus';
 import { reqeuestLog, responseLog } from './helper/requestLog';
 
 import type { ResultData } from './interface';
@@ -43,30 +43,61 @@ class RequestHttp {
 		 */
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				const { data, config } = response;
+				const { config } = response;
 				// 1.关闭进度条
 				NProgress.done();
 				// 2.请求结束移除本次请求
 				axiosCanceler.removePending(config);
 				// 3.关闭全屏loading
 				tryHideFullScreenLoading();
-				// 4.输出结果日志
-				responseLog(response);
-				return data;
+				return this.handleResponseData(response);
 			},
 			(error: AxiosError<ResultData>) => {
 				NProgress.done();
 				tryHideFullScreenLoading();
 				const { response } = error;
-				// 1.处理请求超时 无response
-				if (error.message.includes('timeout')) message.error('请求超时');
-				// 2.响应不同错误状态码
-				if (response) checkStatus(response.status, response.data.msg);
-				// 3.浏览器网络断开错误 跳转断网页面
-				if (!window.navigator.onLine) window.location.hash = '/500';
-				return Promise.reject(error);
+				// 处理无返回错误
+				if (!response) {
+					//浏览器网络断开 - 跳转断网页面
+					if (!window.navigator.onLine) window.location.hash = '/500';
+					if (error.message.includes('timeout')) message.error('请求超时');
+					else message.error('连接后台接口失败');
+					return Promise.reject(error);
+				}
+				// 处理返回数据
+				if (response) return this.handleResponseData(response);
 			}
 		);
+	}
+	/**
+	 * @description: 处理后台响应数据
+	 */
+	handleResponseData(response: AxiosResponse) {
+		const { data, status } = response;
+		// 1.输出结果日志
+		responseLog(response);
+
+		// 2.使用返回数据覆盖code值
+		let code: number = data && data.code ? data.code : status;
+		if (codeVerificationArray.includes(code)) code = 200;
+
+		// 3.处理业务逻辑
+		switch (code) {
+			case 200:
+				// 正常业务逻辑
+				return data;
+			case 401:
+				// 登录过期
+				break;
+			case 403:
+				// 无权限
+				break;
+			default:
+				break;
+		}
+		// 4.处理异常数据
+		checkStatus(code, data && data.msg);
+		return Promise.reject(data);
 	}
 	get<T, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<ResultData<T>> {
 		return this.service.get(url, config);

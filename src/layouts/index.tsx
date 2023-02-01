@@ -25,8 +25,8 @@ const LayoutIndex: React.FC = () => {
 	const isCollapse = useAppSelector(state => state.menu.isCollapse);
 
 	return (
-		<Layout hasSider={true} className={styled.root}>
-			<Sider collapsed={isCollapse} theme="dark">
+		<Layout hasSider className={styled.root}>
+			<Sider collapsed={isCollapse}>
 				<LayoutMenu />
 			</Sider>
 			<Layout>

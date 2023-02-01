@@ -1,0 +1,12 @@
+.root {
+	padding: 0 40px 0 20px !important;
+	background-color: #fff !important;
+
+	:global {
+		.icon {
+			font-size: 20px;
+			line-height: 64px;
+			cursor: pointer;
+		}
+	}
+}
