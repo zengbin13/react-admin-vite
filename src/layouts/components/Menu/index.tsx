@@ -1,10 +1,11 @@
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from '@ant-design/icons';
-import { getMenuListApi } from '@/api/modules/menu';
+import { getMenuListApi, ApiMenuItem } from '@/api/modules/menu';
+import { useEffect, useState } from 'react';
+import ReactIcon from '@/components/ReactIcon';
+import { RobotOutlined } from '@ant-design/icons';
 
 type MenuItem = Required<MenuProps>['items'][number];
-
 function getItem(
 	label: React.ReactNode,
 	key: React.Key,
@@ -21,32 +22,34 @@ function getItem(
 	} as MenuItem;
 }
 
-const items: MenuItem[] = [
-	getItem('Option 1', '1', <PieChartOutlined />),
-	getItem('Option 2', '2', <DesktopOutlined />),
-	getItem('Option 3', '3', <ContainerOutlined />),
-
-	getItem('Navigation One', 'sub1', <MailOutlined />, [
-		getItem('Option 5', '5'),
-		getItem('Option 6', '6'),
-		getItem('Option 7', '7'),
-		getItem('Option 8', '8')
-	]),
-
-	getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-		getItem('Option 9', '9'),
-		getItem('Option 10', '10'),
-
-		getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')])
-	])
-];
-
 const LayoutMenu = () => {
+	//菜单目录
+	const [items, setItems] = useState<MenuItem[]>([]);
+	// 获取动态图标
+	const getIcon = (name?: string): React.ReactNode => {
+		if (!name) return null;
+		return <RobotOutlined />;
+		return <ReactIcon type={'icon-home'} style={{ color: '#a6adb4', fontSize: '18px' }}></ReactIcon>;
+	};
+	// 处理后台数据为antd menu需要的格式
+	const deepLoopFloat = (list: ApiMenuItem[], newArr: MenuItem[] = []) => {
+		list.forEach(item => {
+			if (!item?.children?.length) return newArr.push(getItem(item.meta.title, item.name, getIcon(item.meta.icon)));
+			newArr.push(getItem(item.meta.title, item.name, getIcon(item.meta.icon), deepLoopFloat(item.children)));
+		});
+		return newArr;
+	};
+	// 后台获取菜单目录
 	const getMenuList = async () => {
 		const { data } = await getMenuListApi();
-		console.log(data);
+		if (!data) return;
+		setItems(deepLoopFloat(data));
 	};
-	getMenuList();
+
+	useEffect(() => {
+		getMenuList();
+	}, []);
+
 	return (
 		<>
 			<Menu mode="inline" theme="dark" items={items} />

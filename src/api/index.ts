@@ -6,9 +6,9 @@ import { checkStatus, codeVerificationArray } from './helper/checkStatus';
 import { reqeuestLog, responseLog } from './helper/requestLog';
 
 import type { ResultData } from './interface';
-
 import { AxiosCanceler } from './helper/axiosCancel';
 const axiosCanceler = new AxiosCanceler();
+import store from '@/redux';
 
 class RequestHttp {
 	service: AxiosInstance;
@@ -29,7 +29,10 @@ class RequestHttp {
 				axiosCanceler.addPending(config);
 				// 3.是否展示全屏loading
 				config.headers!.fullLoading && showFullScreenLoading();
-				// 4.输出请求日志
+				// 4.添加token
+				const token = store.getState().global.token;
+				if (token) config.headers!['Authorization'] = `Bearer ${token}`;
+				// 输出请求日志
 				reqeuestLog(config);
 				return config;
 			},

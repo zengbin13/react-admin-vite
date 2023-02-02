@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { GlobalState } from '../interface/index';
+import { RootState } from '../index';
 
 const initialState: GlobalState = {
-	token: 'xx'
+	token: ''
 };
 
 const globalSlice = createSlice({
@@ -14,6 +15,9 @@ const globalSlice = createSlice({
 		}
 	}
 });
+
+// selector
+export const selectToken = (state: RootState) => state.global.token;
 
 //action creators
 export const { setToken } = globalSlice.actions;
