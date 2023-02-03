@@ -1,12 +1,26 @@
+type CustomRequired<T, K extends keyof T> = {
+	[P in K]-?: T[P];
+} & Omit<T, K>;
+
 export interface MateProps {
 	key?: string;
 	title?: string;
 	requiresAuth?: boolean;
+	hidden?: boolean;
+	icon?: React.ReactNode;
+}
+export type RouteObject = RouteOriginObject | RouteMenuObject;
+
+export interface RouteMenuObject {
+	path?: string;
+	element?: React.ReactNode | null;
+	meta: CustomRequired<MateProps, 'key' | 'title'>;
+	children?: RouteMenuObject[];
 }
 
-export interface RouteObject {
+export interface RouteOriginObject {
 	path?: string;
 	element?: React.ReactNode | null;
 	meta?: MateProps;
-	children?: RouteObject[];
+	children?: RouteOriginObject[];
 }

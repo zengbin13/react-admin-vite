@@ -1,0 +1,23 @@
+.root {
+	:global {
+		.menu-logo {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 44px;
+			padding: 0 10px;
+			margin: 10px;
+			overflow: hidden;
+			color: #fff;
+			background-color: #4d5c6a;
+			border-radius: 6px;
+
+			.title {
+				display: inline-block;
+				flex: 1;
+				padding: 0 12px;
+				font-size: 18px;
+			}
+		}
+	}
+}

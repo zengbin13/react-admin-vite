@@ -1,5 +1,7 @@
 import { defineConfig, UserConfig, ConfigEnv, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
+
 import { resolve } from 'path';
 import { wrapperEnv } from './src/utils/getEnv';
 
@@ -30,6 +32,6 @@ export default defineConfig((configEnv: ConfigEnv): UserConfig => {
 				}
 			}
 		},
-		plugins: [react()]
+		plugins: [react(), svgr()]
 	};
 });

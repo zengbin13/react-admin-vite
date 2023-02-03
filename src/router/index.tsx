@@ -1,14 +1,15 @@
 import { useRoutes, Navigate } from 'react-router-dom';
-import type { RouteObject } from './interface';
+import type { RouteObject, RouteMenuObject } from './interface';
 import Login from '@/views/login';
 
 // 导入所有routes模块
 const routeModules = import.meta.glob('./modules/*.tsx', { eager: true });
 
 // 处理路由
-const routesArray: RouteObject[] = [];
+export const routesArray: RouteMenuObject[] = [];
+
 Object.keys(routeModules).forEach(item => {
-	routesArray.push(...(routeModules[item] as { default: RouteObject[] }).default);
+	routesArray.push(...(routeModules[item] as { default: RouteMenuObject[] }).default);
 });
 
 // 使用js方式定义路由对象

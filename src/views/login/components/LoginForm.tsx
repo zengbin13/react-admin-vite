@@ -3,12 +3,11 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { loginApi } from '@/api/modules/login';
 import { setToken } from '@/redux/modules/global';
-import { useAppSelector, useAppDispatch } from '@/redux';
+import { useAppDispatch } from '@/redux';
 import { useNavigate } from 'react-router-dom';
 import { HOME_URL } from '@/config/config';
 function LoginForm() {
 	//hooks
-	const token = useAppSelector(state => state.global.token);
 	const dispatch = useAppDispatch();
 	const nav = useNavigate();
 
@@ -66,7 +65,7 @@ function LoginForm() {
 			</Form.Item>
 			<Form.Item>
 				<Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-					登录 {token}
+					登录
 				</Button>
 			</Form.Item>
 		</Form>
