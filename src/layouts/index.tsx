@@ -6,6 +6,7 @@ import styled from './index.module.scss';
 import { useAppSelector } from '@/redux';
 import LayoutMenu from './components/Menu';
 import LayoutHeader from './components/Header';
+import { Outlet } from 'react-router-dom';
 const contentStyle: React.CSSProperties = {
 	textAlign: 'center',
 	minHeight: 120,
@@ -30,7 +31,9 @@ const LayoutIndex: React.FC = () => {
 			</Sider>
 			<Layout>
 				<LayoutHeader />
-				<Content style={contentStyle}></Content>
+				<Content style={contentStyle}>
+					<Outlet />
+				</Content>
 				<Footer style={footerStyle}>Footer</Footer>
 			</Layout>
 		</Layout>

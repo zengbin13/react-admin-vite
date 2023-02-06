@@ -7,18 +7,14 @@ import { HomeOutlined } from '@ant-design/icons';
 const homeRoutes: Array<RouteMenuObject> = [
 	{
 		element: <LayoutIndex />,
-		meta: {
-			key: 'root',
-			title: '首页',
-			icon: <HomeOutlined />
-		},
 		children: [
 			{
 				path: '/index',
 				element: <div>首页</div>,
 				meta: {
 					key: 'index',
-					title: '首页'
+					title: '首页',
+					icon: <HomeOutlined />
 				}
 			}
 		]

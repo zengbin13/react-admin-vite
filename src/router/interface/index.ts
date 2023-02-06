@@ -10,10 +10,16 @@ export interface MateProps {
 	icon?: React.ReactNode;
 }
 export type RouteObject = RouteOriginObject | RouteMenuObject;
+export type RouteMenuObject = RouteLayoutMenuObject | RouteMetaMenuObject;
 
-export interface RouteMenuObject {
+export interface RouteLayoutMenuObject {
+	element: React.ReactNode;
+	children: [RouteMetaMenuObject];
+}
+
+export interface RouteMetaMenuObject {
 	path?: string;
-	element?: React.ReactNode | null;
+	element?: React.ReactNode;
 	meta: CustomRequired<MateProps, 'key' | 'title'>;
 	children?: RouteMenuObject[];
 }

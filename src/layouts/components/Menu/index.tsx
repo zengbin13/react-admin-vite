@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import type { MenuProps } from 'antd';
-type MenuItem = Required<MenuProps>['items'][number];
 import { Menu } from 'antd';
 import MenuLogo from './component/Logo';
 import ReactIcon from '@/components/ReactIcon';
@@ -14,6 +13,8 @@ import { routesArray } from '@/router';
 import { RouteMenuObject } from '@/router/interface';
 import { AUTHENTICATION, HOME_URL } from '@/config/config';
 import styled from './index.module.scss';
+
+type MenuItem = Required<MenuProps>['items'][number];
 function getItem(
 	label: React.ReactNode,
 	key: React.Key,
@@ -47,8 +48,14 @@ const LayoutMenu = () => {
 	// 处理数据为antd menu需要的格式
 	const deepLoopFloat = (list: RouteMenuObject[], newArr: MenuItem[] = []): MenuItem[] => {
 		list.forEach(item => {
+			console.log(item, 'item');
+			// 处理无meta的布局组件 - 类型保护 in
+			if (!('meta' in item)) {
+				item = item.children[0];
+			}
+			// 处理menu
 			if (!item?.children?.length) {
-				if (item.meta.hidden) return;
+				if (item.meta.hidden) return; //隐藏的图标
 				return newArr.push(getItem(item.meta.title, item.meta.key, getIcon(item.meta.icon)));
 			}
 			newArr.push(getItem(item.meta.title, item.meta.key, getIcon(item.meta.icon), deepLoopFloat(item.children)));
@@ -56,16 +63,11 @@ const LayoutMenu = () => {
 		return newArr;
 	};
 
-	// 处理后台数据为面包屑需要的格式
-	const findAllBreadcrumb = (list: RouteMenuObject[]) => {
-		console.log(list);
-	};
-
 	// 获取菜单目录
 	const getMenuList = async () => {
 		const data = AUTHENTICATION == 'all' ? await getMenuListApi() : routesArray;
+		console.log(data, 'data');
 		setItems(deepLoopFloat(data));
-		findAllBreadcrumb(data);
 		dispatch(setReduxMenuList(data));
 	};
 

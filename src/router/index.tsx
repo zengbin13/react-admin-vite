@@ -5,6 +5,7 @@ import Login from '@/views/login';
 // 导入所有routes模块
 const routeModules = import.meta.glob('./modules/*.tsx', { eager: true });
 
+console.log(routeModules);
 // 处理路由
 export const routesArray: RouteMenuObject[] = [];
 
