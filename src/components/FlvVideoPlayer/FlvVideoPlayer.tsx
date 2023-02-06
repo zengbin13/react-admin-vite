@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-// import './FlvVideoPlayer.scss';
+// import './FlvVideoPlayer.less';
 import flvjs from 'flv.js';
 import { Button } from 'antd';
 

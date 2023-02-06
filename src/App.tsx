@@ -1,13 +1,20 @@
 import Router from '@/router';
 import { HashRouter } from 'react-router-dom';
 import AuthRouter from '@/router/utils/authRouter';
+import { ConfigProvider, theme } from 'antd';
 
 function App() {
 	return (
 		<HashRouter>
-			<AuthRouter>
-				<Router />
-			</AuthRouter>
+			<ConfigProvider
+				theme={{
+					algorithm: theme.defaultAlgorithm
+				}}
+			>
+				<AuthRouter>
+					<Router />
+				</AuthRouter>
+			</ConfigProvider>
 		</HashRouter>
 	);
 }

@@ -1,8 +1,7 @@
 import LayoutIndex from '@/layouts';
 import type { RouteMenuObject } from '../interface';
-// import React from 'react';
-// import lazyLoad from '../utils/lazyLoad';
 import { HomeOutlined } from '@ant-design/icons';
+import Home from '@/views/home';
 
 const homeRoutes: Array<RouteMenuObject> = [
 	{
@@ -10,7 +9,7 @@ const homeRoutes: Array<RouteMenuObject> = [
 		children: [
 			{
 				path: '/index',
-				element: <div>首页</div>,
+				element: <Home />,
 				meta: {
 					key: 'index',
 					title: '首页',

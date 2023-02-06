@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import styled from './index.module.scss';
+import styled from './index.module.less';
 import CollapseIcon from './CollapseIcon';
 // import BreadcrumbNav from './BreadcrumbNav';
 

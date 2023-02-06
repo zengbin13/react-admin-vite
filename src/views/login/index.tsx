@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import styles from './index.module.less';
 import loginLeftImg from '@/assets/images/login_left.png';
 // import logoImg from '@/assets/images/logo.png';
 

@@ -12,7 +12,7 @@ import { searchRoute } from '@/utils/utils';
 import { routesArray } from '@/router';
 import { RouteMenuObject } from '@/router/interface';
 import { AUTHENTICATION, HOME_URL } from '@/config/config';
-import styled from './index.module.scss';
+import styled from './index.module.less';
 
 type MenuItem = Required<MenuProps>['items'][number];
 function getItem(
@@ -48,7 +48,6 @@ const LayoutMenu = () => {
 	// 处理数据为antd menu需要的格式
 	const deepLoopFloat = (list: RouteMenuObject[], newArr: MenuItem[] = []): MenuItem[] => {
 		list.forEach(item => {
-			console.log(item, 'item');
 			// 处理无meta的布局组件 - 类型保护 in
 			if (!('meta' in item)) {
 				item = item.children[0];

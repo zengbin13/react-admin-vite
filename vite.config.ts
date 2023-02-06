@@ -5,6 +5,11 @@ import svgr from 'vite-plugin-svgr';
 import { resolve } from 'path';
 import { wrapperEnv } from './src/utils/getEnv';
 
+// ant组件颜色变量注入scss
+import { theme } from 'antd';
+const { defaultAlgorithm, defaultSeed } = theme;
+const mapToken = defaultAlgorithm(defaultSeed);
+
 // https://vitejs.dev/config/
 export default defineConfig((configEnv: ConfigEnv): UserConfig => {
 	// 加载环境变量
@@ -29,6 +34,14 @@ export default defineConfig((configEnv: ConfigEnv): UserConfig => {
 					target: viteEnv.VITE_API_URL,
 					changeOrigin: true
 					// rewrite: path => path.replace(/^\/api/, '')
+				}
+			}
+		},
+		css: {
+			preprocessorOptions: {
+				less: {
+					javascriptEnabled: true,
+					modifyVars: mapToken
 				}
 			}
 		},

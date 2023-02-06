@@ -1,5 +1,5 @@
 import { Spin } from 'antd';
-import styles from './index.module.scss';
+import styles from './index.module.less';
 
 function FullLoading({ tip = 'loading' }: { tip?: string }) {
 	return (

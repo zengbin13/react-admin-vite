@@ -4,7 +4,7 @@ import App from './App';
 // 样式文件优先级 重置 > UI组件 > 全局样式
 import 'reset-css';
 import 'antd/dist/reset.css';
-import '@/styles/global.scss';
+import '@/styles/global.less';
 
 // redux
 import store, { persistor } from '@/redux';
