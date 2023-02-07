@@ -11,3 +11,5 @@ declare interface ViteEnv {
 	VITE_BUILD_GZIP: boolean;
 	VITE_REPORT: boolean;
 }
+
+declare module '@zougt/vite-plugin-theme-preprocessor';

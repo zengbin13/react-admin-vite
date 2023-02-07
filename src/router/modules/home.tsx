@@ -3,6 +3,8 @@ import type { RouteMenuObject } from '../interface';
 import { HomeOutlined } from '@ant-design/icons';
 import Home from '@/views/home';
 
+console.log(LayoutIndex, 'LayoutIndex');
+
 const homeRoutes: Array<RouteMenuObject> = [
 	{
 		element: <LayoutIndex />,

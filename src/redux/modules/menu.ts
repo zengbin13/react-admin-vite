@@ -4,7 +4,7 @@ import { RootState } from '@/redux';
 import { RouteMenuObject } from '@/router/interface';
 
 const initialState: MenuState = {
-	isCollapse: true,
+	isCollapse: false,
 	menuList: []
 };
 

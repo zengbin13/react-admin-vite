@@ -33,6 +33,7 @@
 		"stylelint-less": "^1.0.6"
 	},
 	"devDependencies": {
+		"@types/less": "^3.0.3",
 		"@types/node": "^18.11.18",
 		"@types/nprogress": "^0.2.0",
 		"@types/qs": "^6.9.7",
