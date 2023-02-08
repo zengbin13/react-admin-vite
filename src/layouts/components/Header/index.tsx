@@ -2,14 +2,10 @@ import { Layout } from 'antd';
 import styled from './index.module.less';
 import CollapseIcon from './CollapseIcon';
 // import BreadcrumbNav from './BreadcrumbNav';
-import { Switch } from 'antd';
-import { useAppSelector } from '@/redux';
 import useTheme from '@/hooks/useTheme';
-
+import Theme from './Theme';
 const LayoutHeader = () => {
-	const { isDark } = useAppSelector(state => state.global.themeConfig);
-
-	const { token, updateDarkTheme } = useTheme();
+	const { token } = useTheme();
 	return (
 		<Layout.Header className={styled.root} style={{ backgroundColor: token.colorBgContainer }}>
 			{/* 折叠按钮 */}
@@ -18,7 +14,9 @@ const LayoutHeader = () => {
 			{/* <BreadcrumbNav /> */}
 			<div className="breadcrumb">BreadcrumbNav</div>
 			{/* 切换暗黑模式 */}
-			<Switch checked={isDark} onChange={updateDarkTheme} />
+			<div className="right-panel">
+				<Theme></Theme>
+			</div>
 		</Layout.Header>
 	);
 };

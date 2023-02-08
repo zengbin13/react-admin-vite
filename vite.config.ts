@@ -9,6 +9,7 @@ import { wrapperEnv } from './src/utils/getEnv';
 import { theme } from 'antd';
 const { defaultAlgorithm, defaultSeed, darkAlgorithm } = theme;
 const mapToken = darkAlgorithm(defaultSeed);
+console.log(mapToken, 'mapToken');
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv: ConfigEnv): UserConfig => {

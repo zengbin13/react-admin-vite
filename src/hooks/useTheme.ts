@@ -1,21 +1,40 @@
 import { theme } from 'antd';
 import { useAppDispatch, useAppSelector } from '@/redux';
-import { setDark } from '@/redux/modules/global';
-
+import { setDark, setThemeName } from '@/redux/modules/global';
+import { ThemeName } from '@/redux/interface';
 const useTheme = () => {
-	const { isDark } = useAppSelector(state => state.global.themeConfig);
+	const { isDark, themeName } = useAppSelector(state => state.global.themeConfig);
 	const dispatch = useAppDispatch();
-	document.body.setAttribute('theme', isDark ? 'dark' : 'light');
+	const lightThemeList: ThemeName[] = ['light', 'peach'];
+	const getPrimatyColor = (theme: ThemeName = themeName) => {
+		switch (theme) {
+			case 'light':
+				return '#1677ff';
+			case 'peach':
+				return '#ed4192';
+			default:
+				return '#1677ff';
+		}
+	};
 
 	// antd 颜色变量token
 	const { token } = theme.useToken();
 	const algorithm = isDark ? theme.darkAlgorithm : theme.defaultAlgorithm;
-	// 切换暗黑模式
+	// 切换为暗黑模式
 	const updateDarkTheme = () => {
-		dispatch(setDark(!isDark));
-		document.body.setAttribute('theme', isDark ? 'dark' : 'light');
+		dispatch(setDark(true));
+		document.body.setAttribute('theme', 'dark');
 	};
-	return { token, algorithm, updateDarkTheme, isDark };
+	// 切换为亮色模式
+	const updateLightTheme = (theme: ThemeName) => {
+		dispatch(setDark(false));
+		dispatch(setThemeName(theme));
+		document.body.setAttribute('theme', theme);
+	};
+	const initTheme = () => {
+		isDark ? updateDarkTheme() : updateLightTheme(themeName);
+	};
+	return { token, algorithm, updateDarkTheme, isDark, updateLightTheme, getPrimatyColor, lightThemeList, initTheme };
 };
 
 export default useTheme;

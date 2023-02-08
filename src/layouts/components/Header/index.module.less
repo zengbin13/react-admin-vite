@@ -7,7 +7,7 @@
 	:global {
 		.icon {
 			width: 64px;
-			font-size: 20px;
+			font-size: 22px;
 			line-height: 64px;
 			cursor: pointer;
 		}
@@ -16,6 +16,73 @@
 			display: flex;
 			flex: 1;
 			align-items: center;
+		}
+
+		.right-panel {
+			display: flex;
+			align-items: center;
+
+			.icon {
+				position: relative;
+				top: 0;
+				display: flex;
+				justify-content: center;
+				width: 32px;
+				font-size: 18px;
+				font-weight: 900;
+				line-height: 64px;
+				color: var(--color-text);
+				text-align: center;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.drawer {
+	:global {
+		.theme-item {
+			padding: 10px 5px;
+		}
+
+		.theme {
+			display: flex;
+
+			.light,
+			.dark {
+				width: 40px;
+				height: 32px;
+				margin-right: 12px;
+				line-height: 32px;
+				text-align: center;
+				cursor: pointer;
+				border-radius: 6px;
+				box-shadow: 0 0 5px 0 #d2d2d2;
+			}
+
+			.light {
+				color: #000;
+				background-color: #fff;
+			}
+
+			.dark {
+				color: #fff;
+				background-color: #263849;
+			}
+		}
+
+		.primary {
+			ul {
+				display: flex;
+
+				li {
+					width: 20px;
+					height: 20px;
+					margin-right: 12px;
+					cursor: pointer;
+					border-radius: 4px;
+				}
+			}
 		}
 	}
 }

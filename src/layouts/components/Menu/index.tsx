@@ -34,6 +34,7 @@ function getItem(
 const LayoutMenu = () => {
 	const dispatch = useAppDispatch();
 	const { menuList: reduxMenuList } = useAppSelector(state => state.menu);
+	const { isDark } = useAppSelector(state => state.global.themeConfig);
 	const navigate = useNavigate();
 
 	//菜单目录
@@ -85,7 +86,7 @@ const LayoutMenu = () => {
 	return (
 		<div className={styled.root}>
 			<MenuLogo></MenuLogo>
-			<Menu mode="inline" theme="dark" items={items} onClick={menuClick} />
+			<Menu mode="inline" theme={isDark ? 'dark' : 'light'} items={items} onClick={menuClick} />
 		</div>
 	);
 };

@@ -7,18 +7,14 @@ import { useAppSelector } from '@/redux';
 import LayoutMenu from './components/Menu';
 import LayoutHeader from './components/Header';
 import { Outlet } from 'react-router-dom';
-const footerStyle: React.CSSProperties = {
-	textAlign: 'center',
-	color: '#fff',
-	backgroundColor: '#7dbcea'
-};
 
 const LayoutIndex: React.FC = () => {
 	const isCollapse = useAppSelector(state => state.menu.isCollapse);
+	const { isDark } = useAppSelector(state => state.global.themeConfig);
 
 	return (
 		<Layout hasSider className={styled.root}>
-			<Sider collapsed={isCollapse} width={208} theme="dark">
+			<Sider collapsed={isCollapse} width={208} theme={isDark ? 'dark' : 'light'}>
 				<LayoutMenu />
 			</Sider>
 			<Layout>
@@ -26,7 +22,7 @@ const LayoutIndex: React.FC = () => {
 				<Content>
 					<Outlet />
 				</Content>
-				<Footer style={footerStyle}>Footer</Footer>
+				<Footer className="footer">Footer</Footer>
 			</Layout>
 		</Layout>
 	);
