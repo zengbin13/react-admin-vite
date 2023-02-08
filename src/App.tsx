@@ -1,16 +1,16 @@
 import Router from '@/router';
 import { HashRouter } from 'react-router-dom';
 import AuthRouter from '@/router/utils/authRouter';
-import { ConfigProvider, theme } from 'antd';
-import { useAppSelector } from './redux';
+import { ConfigProvider } from 'antd';
+import useTheme from './hooks/useTheme';
 
 function App() {
-	const { isDark } = useAppSelector(state => state.global.themeConfig);
+	const { algorithm } = useTheme();
 	return (
 		<HashRouter>
 			<ConfigProvider
 				theme={{
-					algorithm: isDark ? theme.defaultAlgorithm : theme.darkAlgorithm
+					algorithm
 				}}
 			>
 				<AuthRouter>

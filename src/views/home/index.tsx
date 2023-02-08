@@ -1,9 +1,11 @@
 import { Button } from 'antd';
+import style from './index.module.less';
 
 const Home = () => {
 	return (
-		<div>
+		<div className={style.root}>
 			<Button type="primary">Home</Button>
+			<div className="title">xxx</div>
 		</div>
 	);
 };

@@ -7,8 +7,8 @@ import { wrapperEnv } from './src/utils/getEnv';
 
 // ant组件颜色变量注入scss
 import { theme } from 'antd';
-const { defaultAlgorithm, defaultSeed } = theme;
-const mapToken = defaultAlgorithm(defaultSeed);
+const { defaultAlgorithm, defaultSeed, darkAlgorithm } = theme;
+const mapToken = darkAlgorithm(defaultSeed);
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv: ConfigEnv): UserConfig => {
