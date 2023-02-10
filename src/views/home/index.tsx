@@ -6,7 +6,6 @@ const Home = () => {
 	return (
 		<div className={classNames(style.root, 'container')}>
 			<Button type="primary">Home</Button>
-			<div className="title">xxx</div>
 		</div>
 	);
 };

@@ -1,0 +1,107 @@
+.root {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-image: url('./images/bg.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+	background-size: cover;
+
+	:global {
+		.chart {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 1920px;
+			height: 1080px;
+			overflow: hidden;
+			background-color: #fff;
+			transition: all 0.3s;
+			transform: translate(-50%, -50%);
+			transform-origin: 0 0;
+		}
+
+		.header-bar {
+			display: flex;
+			justify-content: center;
+			height: 36px;
+			font-family: YouSheBiaoTiHei, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+			.left {
+				display: flex;
+				flex: 1;
+				flex-direction: row-reverse;
+				background-image: url('./images/dataScreen-header-left-bg.png');
+				background-size: 100% 100%;
+
+				.back {
+					width: 135px;
+					height: 42px;
+					font-size: 20px;
+					line-height: 42px;
+					text-align: center;
+					background-image: url('./images/dataScreen-header-btn-bg-l.png');
+				}
+			}
+
+			.right {
+				display: flex;
+				flex: 1;
+				background-image: url('./images/dataScreen-header-right-bg.png');
+				background-size: 100% 100%;
+
+				.title {
+					width: 135px;
+					height: 42px;
+					font-size: 20px;
+					line-height: 42px;
+					text-align: center;
+					background-image: url('./images/dataScreen-header-btn-bg-r.png');
+				}
+
+				.time {
+					flex: 1;
+					line-height: 36px;
+					text-align: right;
+				}
+			}
+
+			.center {
+				position: relative;
+				width: 793px;
+				margin: 0 2px;
+				text-align: center;
+
+				.title {
+					position: absolute;
+					top: 0;
+					right: 0;
+					left: 0;
+					font-size: 32px;
+					line-height: 73px;
+					letter-spacing: 4px;
+					background-image: url('./images/dataScreen-header-center-bg.png');
+				}
+			}
+		}
+
+		.main {
+			display: flex;
+			justify-content: center;
+			height: calc(100% - 36px);
+
+			.left,
+			.right {
+				flex: 1;
+				border: 1px solid #f00;
+			}
+
+			.center {
+				width: 1067px;
+				margin-top: 100px;
+				border: 1px solid #f00;
+			}
+		}
+	}
+}

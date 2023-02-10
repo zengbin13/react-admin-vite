@@ -5,13 +5,14 @@ import Login from '@/views/login';
 // 导入所有routes模块
 const routeModules = import.meta.glob('./modules/*.tsx', { eager: true });
 
-console.log(routeModules);
 // 处理路由
-export const routesArray: RouteMenuObject[] = [];
-
+const routesArray: RouteMenuObject[] = [];
 Object.keys(routeModules).forEach(item => {
 	routesArray.push(...(routeModules[item] as { default: RouteMenuObject[] }).default);
 });
+
+// 处理layout组件循环引用报错的问题
+export const layoutMenuList: RouteMenuObject[] = handleElement(routesArray);
 
 // 使用js方式定义路由对象
 export const rootRoutes: RouteObject[] = [
@@ -42,3 +43,12 @@ const Router = () => {
 };
 
 export default Router;
+
+function handleElement(list: RouteMenuObject[] = []): RouteMenuObject[] {
+	return list.map(route => {
+		const item = { ...route };
+		item.element = null;
+		if (item.children) item.children = handleElement(item.children);
+		return item;
+	});
+}

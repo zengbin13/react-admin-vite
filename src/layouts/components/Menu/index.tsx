@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/redux';
 import { setMenuList as setReduxMenuList } from '@/redux/modules/menu';
 import { useNavigate } from 'react-router-dom';
 import { searchRoute } from '@/utils/utils';
-import { routesArray } from '@/router';
+import { layoutMenuList } from '@/router';
 import { RouteMenuObject } from '@/router/interface';
 import { AUTHENTICATION, HOME_URL } from '@/config/config';
 import styled from './index.module.less';
@@ -65,7 +65,7 @@ const LayoutMenu = () => {
 
 	// 获取菜单目录
 	const getMenuList = async () => {
-		const data = AUTHENTICATION == 'all' ? await getMenuListApi() : routesArray;
+		const data = AUTHENTICATION == 'all' ? await getMenuListApi() : layoutMenuList;
 		console.log(data, 'data');
 		setItems(deepLoopFloat(data));
 		dispatch(setReduxMenuList(data));
@@ -86,7 +86,7 @@ const LayoutMenu = () => {
 	return (
 		<div className={styled.root}>
 			<MenuLogo></MenuLogo>
-			<Menu mode="inline" theme={isDark ? 'dark' : 'light'} items={items} onClick={menuClick} />
+			<Menu mode="inline" theme={isDark ? 'dark' : 'dark'} items={items} onClick={menuClick} />
 		</div>
 	);
 };

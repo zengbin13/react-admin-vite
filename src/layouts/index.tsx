@@ -14,7 +14,7 @@ const LayoutIndex: React.FC = () => {
 
 	return (
 		<Layout hasSider className={styled.root}>
-			<Sider collapsed={isCollapse} width={208} theme={isDark ? 'dark' : 'light'}>
+			<Sider collapsed={isCollapse} width={208} theme={isDark ? 'dark' : 'dark'}>
 				<LayoutMenu />
 			</Sider>
 			<Layout>
