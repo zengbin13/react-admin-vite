@@ -5,4 +5,4 @@ export const HOME_URL: string = '/index';
 export const PRIMARY_COLOR: string = '#f00';
 
 // 路由导出模式: intelligence 前端路由 all 后端路由
-export const AUTHENTICATION: 'intelligence' | 'all' = 'intelligence';
+export const AUTHENTICATION: 'intelligence' | 'all' = 'all';

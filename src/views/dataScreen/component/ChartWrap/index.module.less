@@ -1,0 +1,67 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	:global {
+		.header {
+			height: 46px;
+
+			.lf {
+				display: flex;
+
+				.title {
+					display: flex;
+					flex-direction: column;
+					min-width: 100px;
+					font-family: YouSheBiaoTiHei, 'Open Sans', 'Helvetica Neue', sans-serif;
+					font-size: 20px;
+					color: #fff;
+					border-bottom: 1px solid #2d4479;
+
+					.name {
+						display: inline-block;
+						margin-bottom: 10px;
+					}
+
+					.line {
+						width: 68px;
+						height: 7px;
+						background-image: url('../../images/dataScreen-title.png');
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: 100% 100%;
+						background-size: cover;
+					}
+				}
+
+				.split {
+					position: relative;
+					bottom: 0;
+					left: 2px;
+					width: 33px;
+					height: 46px;
+					background-image: url('../../images/dataScreen-hypotenuse.png');
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: 100% 100%;
+					background-size: cover;
+				}
+
+				.bg {
+					position: relative;
+					flex: 1;
+					background-color: #11144e;
+				}
+			}
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			overflow: hidden;
+			background-color: #11144e;
+		}
+	}
+}

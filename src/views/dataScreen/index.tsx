@@ -3,8 +3,10 @@ import classNames from 'classnames';
 import ReactECharts from 'echarts-for-react';
 import styled from './index.module.less';
 import type { EChartsOption } from 'echarts';
-import { useEffect, useRef } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
+import ChartWrap from './component/ChartWrap';
+import LiquidFillChart from './component/LiquidFillChart';
+import ScenicSpotBarChart from './component/ScenicSpotBarChart';
 const DataScreen = () => {
 	const options: EChartsOption = {
 		// 全局调色盘
@@ -67,6 +69,18 @@ const DataScreen = () => {
 		if (screenRef.current) screenRef.current.style.transform = `scale(${scale}) translate(-50% ,-50%)`;
 	};
 
+	const [liquidFillData, setLiquidFillData] = useState({
+		actual: 171232,
+		total: 999999
+	});
+
+	setTimeout(() => {
+		setLiquidFillData({
+			actual: Math.floor(999999 * Math.random()),
+			total: 999999
+		});
+	}, 10000);
+
 	useEffect(() => {
 		handleScreenAuto();
 		window.addEventListener('resize', handleScreenAuto);
@@ -89,11 +103,33 @@ const DataScreen = () => {
 					</div>
 				</div>
 				<div className="main">
-					<div className="left"></div>
-					<div className="center">
-						<ReactECharts option={options} theme="light" />
+					<div className="left">
+						<div className="chart-item" style={{ minHeight: '400px' }}>
+							<LiquidFillChart data={liquidFillData}></LiquidFillChart>
+						</div>
+						<div className="chart-item">
+							<ChartWrap></ChartWrap>
+						</div>
+						<div className="chart-item">
+							<ChartWrap></ChartWrap>
+						</div>
 					</div>
-					<div className="right"></div>
+					<div className="center">
+						<ChartWrap>
+							<ReactECharts option={options} theme="light" />
+						</ChartWrap>
+					</div>
+					<div className="right">
+						<div className="chart-item">
+							<ScenicSpotBarChart></ScenicSpotBarChart>
+						</div>
+						<div className="chart-item">
+							<ChartWrap></ChartWrap>
+						</div>
+						<div className="chart-item">
+							<ChartWrap></ChartWrap>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
