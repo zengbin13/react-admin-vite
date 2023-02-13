@@ -120,7 +120,7 @@ const DataScreen = () => {
 						</ChartWrap>
 					</div>
 					<div className="right">
-						<div className="chart-item">
+						<div className="chart-item" style={{ minHeight: '400px' }}>
 							<ScenicSpotBarChart></ScenicSpotBarChart>
 						</div>
 						<div className="chart-item">

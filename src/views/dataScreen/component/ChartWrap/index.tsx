@@ -14,8 +14,6 @@ interface Props {
 }
 
 const ChartWrap = ({ options, title, right, className, children }: Props) => {
-	console.log(children);
-
 	return (
 		<div className={classNames(styled.root, className)}>
 			<div className="header">

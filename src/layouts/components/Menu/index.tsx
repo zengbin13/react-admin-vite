@@ -9,10 +9,12 @@ import { useAppDispatch, useAppSelector } from '@/redux';
 import { setMenuList as setReduxMenuList } from '@/redux/modules/menu';
 import { useNavigate } from 'react-router-dom';
 import { searchRoute } from '@/utils/utils';
-import { layoutMenuList } from '@/router';
+// import { layoutMenuList } from '@/router';
 import { RouteMenuObject } from '@/router/interface';
 import { AUTHENTICATION, HOME_URL } from '@/config/config';
 import styled from './index.module.less';
+
+const layoutMenuList: RouteMenuObject[] = [];
 
 type MenuItem = Required<MenuProps>['items'][number];
 function getItem(
